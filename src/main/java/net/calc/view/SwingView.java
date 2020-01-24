@@ -1,10 +1,20 @@
 package net.calc.view;
 
+import net.calc.controller.Controller;
+import net.calc.controller.DummyController;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SwingView {
+    private final Controller controller;
     private JTextField display = null;
+
+    public SwingView(Controller controller) {
+        this.controller = controller;
+    }
 
     public void start() {
         JFrame window = new JFrame("Calculator");
@@ -32,9 +42,16 @@ public class SwingView {
 
         for (int y = 0; y < labels.length; y++) {
             for (int x = 0; x < labels[y].length; x++) {
-                JButton button = new JButton(labels[y][x]);
-                constraints.gridx = x;
-                constraints.gridy = y+1;
+                String label = labels[y][x];
+                JButton button = new JButton(label);
+                button.addActionListener(new DummyActionListener(label));
+                if (y == 4 && x > 6) {
+                    constraints.gridx = x + 1;
+                    constraints.gridy = y + 1;
+                } else {
+                    constraints.gridx = x;
+                    constraints.gridy = y + 1;
+                }
                 if (labels[y][x].equals("0")) {
                     constraints.gridwidth = 2;
                 } else {
@@ -47,10 +64,22 @@ public class SwingView {
         window.pack();
     }
 
+    private class DummyActionListener implements ActionListener {
+        public final String text;
 
+        public DummyActionListener(String text) {
+            this.text = text;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            SwingView.this.controller.buttonPressed(text);
+        }
+    }
 
     public static void main(String[] args) {
-        SwingView view = new SwingView();
+        Controller dummyController = new DummyController();
+        SwingView view = new SwingView(dummyController);
         view.start();
     }
 }
