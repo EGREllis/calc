@@ -6,6 +6,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ControllerImpl implements Controller {
+    private static final int DEFAULT_LENGTH = 17;
+    private static final String E = "e";
+    private static final String RAND = "Rand";
+    private static final String PI = "pi";
     private static final String DECIMAL = ".";
     private static final String MEMORY_CLEAR = "MC";
     private static final String MEMORY_PLUS = "M+";
@@ -43,9 +47,19 @@ public class ControllerImpl implements Controller {
             if (display.contains(".")) {
                 //TODO: Add warning beep!
             } else {
-                display = display+".";
+                display = display + ".";
             }
+        } else if (PI.equals(label)) {
+            String text = Double.toString(Math.PI);
+            display = text.substring(0, Math.min(text.length(), DEFAULT_LENGTH));
+        } else if (RAND.equals(label)) {
+            String text = Double.toString(Math.random());
+            display = text.substring(0, Math.min(text.length(), DEFAULT_LENGTH));
+        } else if (E.equals(label)) {
+            String text = Double.toString(Math.E);
+            display = text.substring(0, Math.min(text.length(), DEFAULT_LENGTH));
         } else if (ALL_CLEAR.equals(label)) {
+            //TODO: Toggle to clear (needs to be investigated)
             display = "0";
         } else if (PLUS_MINUS.equals(label)) {
             if (display.equals(ZERO)) {
