@@ -18,4 +18,9 @@ public class DummyController implements Controller {
         System.out.println(label);
         System.out.flush();
     }
+
+    @Override
+    public void shutdown() {
+
+    }
 }
