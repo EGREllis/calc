@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ControllerImpl implements Controller {
+    private static final String ALL_CLEAR = "AC";
     private static final String ZERO = "0";
     private static final Pattern DIGIT = Pattern.compile("[0-9]");
     private View view;
@@ -31,6 +32,8 @@ public class ControllerImpl implements Controller {
             } else {
                 display += label;
             }
+        } else if (ALL_CLEAR.equals(label)) {
+            display = "0";
         }
         view.updateDisplay();
     }
