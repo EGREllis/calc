@@ -8,16 +8,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SwingView {
+public class SwingView implements View {
     private final Controller controller;
-    private JTextField display = null;
+    private final JTextField display = new JTextField("0");
+    private final JFrame window = new JFrame("Calculator");
 
     public SwingView(Controller controller) {
         this.controller = controller;
     }
 
     public void start() {
-        JFrame window = new JFrame("Calculator");
         window.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -27,7 +27,6 @@ public class SwingView {
         constraints.gridheight = 1;
         constraints.fill = GridBagConstraints.BOTH;
 
-        display = new JTextField("0");
         constraints.gridwidth = 10;
         window.add(display, constraints);
         constraints.gridwidth = 1;
@@ -62,6 +61,12 @@ public class SwingView {
         }
         window.setVisible(true);
         window.pack();
+    }
+
+    public void updateDisplay() {
+        String newDisplay = controller.getDisplay();
+        display.setText(newDisplay);
+
     }
 
     private class DummyActionListener implements ActionListener {
