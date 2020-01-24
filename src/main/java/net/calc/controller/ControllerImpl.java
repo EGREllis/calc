@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ControllerImpl implements Controller {
+    private static final String DECIMAL = ".";
     private static final String MEMORY_CLEAR = "MC";
     private static final String MEMORY_PLUS = "M+";
     private static final String MEMORY_MINUS = "M-";
@@ -33,10 +34,16 @@ public class ControllerImpl implements Controller {
         if (digitMatcher.matches()) {
             if (display.equals(ZERO) && label.equals(ZERO)) {
                 // Do nothing
-            } else if(display.equals(ZERO)) {
+            } else if (display.equals(ZERO)) {
                 display = label;
             } else {
                 display += label;
+            }
+        } else if (DECIMAL.equals(label)) {
+            if (display.contains(".")) {
+                //TODO: Add warning beep!
+            } else {
+                display = display+".";
             }
         } else if (ALL_CLEAR.equals(label)) {
             display = "0";
