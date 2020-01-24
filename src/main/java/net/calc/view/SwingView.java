@@ -1,7 +1,6 @@
 package net.calc.view;
 
 import net.calc.controller.Controller;
-import net.calc.controller.DummyController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -80,11 +79,5 @@ public class SwingView implements View {
         public void actionPerformed(ActionEvent e) {
             SwingView.this.controller.buttonPressed(text);
         }
-    }
-
-    public static void main(String[] args) {
-        Controller dummyController = new DummyController();
-        SwingView view = new SwingView(dummyController);
-        view.start();
     }
 }

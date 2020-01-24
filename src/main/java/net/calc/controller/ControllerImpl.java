@@ -1,5 +1,7 @@
 package net.calc.controller;
 
+import net.calc.model.Model;
+import net.calc.model.Operation;
 import net.calc.view.View;
 
 import java.util.regex.Matcher;
@@ -7,6 +9,11 @@ import java.util.regex.Pattern;
 
 public class ControllerImpl implements Controller {
     private static final int DEFAULT_LENGTH = 17;
+    private static final String EQUALS = "=";
+    private static final String PLUS = "+";
+    private static final String MINUS = "-";
+    private static final String TIMES = "*";
+    private static final String DIVIDE = "/";
     private static final String E = "e";
     private static final String RAND = "Rand";
     private static final String PI = "pi";
@@ -19,12 +26,15 @@ public class ControllerImpl implements Controller {
     private static final String PLUS_MINUS = "+/-";
     private static final String ZERO = "0";
     private static final Pattern DIGIT = Pattern.compile("[0-9]");
+    private boolean isFresh = true;
     private View view;
     private volatile String display = "0";
     private String memory = "0";
 
-    public void setView(View view) {
-        this.view = view;
+    private final Model model;
+
+    public ControllerImpl(Model model) {
+        this.model = model;
     }
 
     @Override
@@ -32,16 +42,23 @@ public class ControllerImpl implements Controller {
         return display;
     }
 
+    public void setView(View view) {
+        this.view = view;
+    }
+
     @Override
     public void buttonPressed(String label) {
         Matcher digitMatcher = DIGIT.matcher(label);
         if (digitMatcher.matches()) {
-            if (display.equals(ZERO) && label.equals(ZERO)) {
-                // Do nothing
-            } else if (display.equals(ZERO)) {
+            if (isFresh) {
                 display = label;
+                isFresh = false;
             } else {
-                display += label;
+                if (display.equals(ZERO)) {
+                    display = label;
+                } else {
+                    display += label;
+                }
             }
         } else if (DECIMAL.equals(label)) {
             if (display.contains(".")) {
@@ -49,6 +66,26 @@ public class ControllerImpl implements Controller {
             } else {
                 display = display + ".";
             }
+        } else if (PLUS.equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.ADD);
+            isFresh = true;
+        } else if (MINUS.equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.SUBTRACT);
+            isFresh = true;
+        } else if (TIMES.equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.MULTIPLY);
+            isFresh = true;
+        } else if (DIVIDE.equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.DIVIDE);
+            isFresh = true;
+        } else if (EQUALS.equals(label)) {
+            model.pushNumber(display);
+            display = model.evaluate();
+            isFresh = true;
         } else if (PI.equals(label)) {
             String text = Double.toString(Math.PI);
             display = text.substring(0, Math.min(text.length(), DEFAULT_LENGTH));
@@ -61,6 +98,7 @@ public class ControllerImpl implements Controller {
         } else if (ALL_CLEAR.equals(label)) {
             //TODO: Toggle to clear (needs to be investigated)
             display = "0";
+            model.clear();
         } else if (PLUS_MINUS.equals(label)) {
             if (display.equals(ZERO)) {
                 // Do nothing
@@ -120,6 +158,11 @@ public class ControllerImpl implements Controller {
                 memory = "" + (memoryDouble - displayDouble);
             }
         }
+        view.updateDisplay();
+    }
+
+    @Override
+    public void updateDisplay(String label) {
         view.updateDisplay();
     }
 
