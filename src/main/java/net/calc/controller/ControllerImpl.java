@@ -9,6 +9,10 @@ import java.util.regex.Pattern;
 
 public class ControllerImpl implements Controller {
     private static final int DEFAULT_LENGTH = 17;
+    private static final String SQUARE = "x^2";
+    private static final String CUBE = "x^3";
+    private static final String SQUARE_ROOT = "x^1/2";
+    private static final String CUBE_ROOT = "x^1/3";
     private static final String EQUALS = "=";
     private static final String PLUS = "+";
     private static final String MINUS = "-";
@@ -66,6 +70,26 @@ public class ControllerImpl implements Controller {
             } else {
                 display = display + ".";
             }
+        } else if (SQUARE.equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.SQUARE);
+            display = model.evaluate();
+            isFresh = true;
+        } else if (CUBE.equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.CUBE);
+            display = model.evaluate();
+            isFresh = true;
+        } else if (SQUARE_ROOT.equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.SQUARE_ROOT);
+            display = model.evaluate();
+            isFresh = true;
+        } else if (CUBE_ROOT.equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.CUBE_ROOT);
+            display = model.evaluate();
+            isFresh = true;
         } else if (PLUS.equals(label)) {
             model.pushNumber(display);
             model.pushOperation(Operation.ADD);
