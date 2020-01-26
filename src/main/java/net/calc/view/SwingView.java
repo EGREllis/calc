@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class SwingView implements View {
     private final Controller controller;
@@ -60,6 +62,7 @@ public class SwingView implements View {
         }
         window.setVisible(true);
         window.pack();
+        window.addWindowListener(new CloseApp());
     }
 
     public void updateDisplay() {
@@ -78,6 +81,39 @@ public class SwingView implements View {
         @Override
         public void actionPerformed(ActionEvent e) {
             SwingView.this.controller.buttonPressed(text);
+        }
+    }
+
+    private static class CloseApp implements WindowListener {
+        @Override
+        public void windowOpened(WindowEvent e) {
+        }
+
+        @Override
+        public void windowClosing(WindowEvent e) {
+            System.out.println("Closing application");
+            System.out.flush();
+            System.exit(0);
+        }
+
+        @Override
+        public void windowClosed(WindowEvent e) {
+        }
+
+        @Override
+        public void windowIconified(WindowEvent e) {
+        }
+
+        @Override
+        public void windowDeiconified(WindowEvent e) {
+        }
+
+        @Override
+        public void windowActivated(WindowEvent e) {
+        }
+
+        @Override
+        public void windowDeactivated(WindowEvent e) {
         }
     }
 }
