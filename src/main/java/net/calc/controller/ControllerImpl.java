@@ -9,23 +9,11 @@ import java.util.regex.Pattern;
 
 public class ControllerImpl implements Controller {
     private static final int DEFAULT_LENGTH = 17;
-    private static final String SQUARE = "x^2";
-    private static final String CUBE = "x^3";
-    private static final String SQUARE_ROOT = "x^1/2";
-    private static final String CUBE_ROOT = "x^1/3";
     private static final String EQUALS = "=";
-    private static final String PLUS = "+";
-    private static final String MINUS = "-";
-    private static final String TIMES = "*";
-    private static final String DIVIDE = "/";
     private static final String E = "e";
     private static final String RAND = "Rand";
     private static final String PI = "pi";
     private static final String DECIMAL = ".";
-    private static final String MEMORY_CLEAR = "MC";
-    private static final String MEMORY_PLUS = "M+";
-    private static final String MEMORY_MINUS = "M-";
-    private static final String MEMORY_RECALL = "MR";
     private static final String ALL_CLEAR = "AC";
     private static final String PLUS_MINUS = "+/-";
     private static final String ZERO = "0";
@@ -70,39 +58,54 @@ public class ControllerImpl implements Controller {
             } else {
                 display = display + ".";
             }
-        } else if (SQUARE.equals(label)) {
+        } else if (Operation.SIN.getLabel().equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.SIN);
+            display = model.evaluate();
+            isFresh = true;
+        } else if (Operation.COS.getLabel().equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.COS);
+            display = model.evaluate();
+            isFresh = true;
+        } else if (Operation.TAN.getLabel().equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.TAN);
+            display = model.evaluate();
+            isFresh = true;
+        } else if (Operation.SQUARE.getLabel().equals(label)) {
             model.pushNumber(display);
             model.pushOperation(Operation.SQUARE);
             display = model.evaluate();
             isFresh = true;
-        } else if (CUBE.equals(label)) {
+        } else if (Operation.CUBE.getLabel().equals(label)) {
             model.pushNumber(display);
             model.pushOperation(Operation.CUBE);
             display = model.evaluate();
             isFresh = true;
-        } else if (SQUARE_ROOT.equals(label)) {
+        } else if (Operation.SQUARE_ROOT.getLabel().equals(label)) {
             model.pushNumber(display);
             model.pushOperation(Operation.SQUARE_ROOT);
             display = model.evaluate();
             isFresh = true;
-        } else if (CUBE_ROOT.equals(label)) {
+        } else if (Operation.CUBE_ROOT.getLabel().equals(label)) {
             model.pushNumber(display);
             model.pushOperation(Operation.CUBE_ROOT);
             display = model.evaluate();
             isFresh = true;
-        } else if (PLUS.equals(label)) {
+        } else if (Operation.ADD.getLabel().equals(label)) {
             model.pushNumber(display);
             model.pushOperation(Operation.ADD);
             isFresh = true;
-        } else if (MINUS.equals(label)) {
+        } else if (Operation.SUBTRACT.getLabel().equals(label)) {
             model.pushNumber(display);
             model.pushOperation(Operation.SUBTRACT);
             isFresh = true;
-        } else if (TIMES.equals(label)) {
+        } else if (Operation.MULTIPLY.getLabel().equals(label)) {
             model.pushNumber(display);
             model.pushOperation(Operation.MULTIPLY);
             isFresh = true;
-        } else if (DIVIDE.equals(label)) {
+        } else if (Operation.DIVIDE.equals(label)) {
             model.pushNumber(display);
             model.pushOperation(Operation.DIVIDE);
             isFresh = true;
@@ -131,11 +134,11 @@ public class ControllerImpl implements Controller {
             } else {
                 display = "-"+display;
             }
-        } else if (MEMORY_RECALL.equals(label)) {
+        } else if (Operation.MEMORY_RECALL.getLabel().equals(label)) {
             display = memory;
-        } else if (MEMORY_CLEAR.equals(label)) {
+        } else if (Operation.MEMORY_CLEAR.getLabel().equals(label)) {
             memory = "0";
-        } else if (MEMORY_PLUS.equals(label)) {
+        } else if (Operation.MEMORY_ADD.getLabel().equals(label)) {
             boolean isDisplayLong = true;
             long displayLong = 0L;
             try {
@@ -158,7 +161,7 @@ public class ControllerImpl implements Controller {
                 double displayDouble = Double.parseDouble(display);
                 memory = "" + (memoryDouble + displayDouble);
             }
-        } else if (MEMORY_MINUS.equals(label)) {
+        } else if (Operation.MEMORY_SUBTRACT.getLabel().equals(label)) {
             boolean isDisplayLong = true;
             long displayLong = 0L;
             try {
