@@ -3,10 +3,37 @@ package net.calc.model;
 import java.util.Deque;
 
 public enum Operation {
+    RECALL_E(0, "e"),
+    RECALL_PI(0, "pi"),
+    RECALL_RAND(0, "Rand"),
     MEMORY_CLEAR(0, "MC"),
     MEMORY_ADD(0, "M+"),
     MEMORY_SUBTRACT(0, "M-"),
     MEMORY_RECALL(0, "MR"),
+    SINH(1, "sinh") {
+        String calculateSingleDouble(double first) {
+            return Double.toString(Math.sinh(first));
+        }
+        String calculateSingleLong(long first) {
+            return Double.toString(Math.sinh(first));
+        }
+    },
+    COSH(1, "cosh") {
+        String calculateSingleDouble(double first) {
+            return Double.toString(Math.cosh(first));
+        }
+        String calculateSingleLong(long first) {
+            return Double.toString(Math.cosh(first));
+        }
+    },
+    TANH(1, "tanh") {
+        String calculateSingleDouble(double first) {
+            return Double.toString(Math.tanh(first));
+        }
+        String calculateSingleLong(long first) {
+            return Double.toString(Math.tanh(first));
+        }
+    },
     SIN(1, "sin") {
         String calculateSingleDouble(double first) {
             return Double.toString(Math.sin(first));

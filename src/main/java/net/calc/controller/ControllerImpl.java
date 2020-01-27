@@ -10,9 +10,6 @@ import java.util.regex.Pattern;
 public class ControllerImpl implements Controller {
     private static final int DEFAULT_LENGTH = 17;
     private static final String EQUALS = "=";
-    private static final String E = "e";
-    private static final String RAND = "Rand";
-    private static final String PI = "pi";
     private static final String DECIMAL = ".";
     private static final String ALL_CLEAR = "AC";
     private static final String PLUS_MINUS = "+/-";
@@ -58,6 +55,21 @@ public class ControllerImpl implements Controller {
             } else {
                 display = display + ".";
             }
+        } else if (Operation.SINH.getLabel().equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.SINH);
+            display = model.evaluate();
+            isFresh = true;
+        } else if (Operation.COSH.getLabel().equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.COSH);
+            display = model.evaluate();
+            isFresh = true;
+        } else if (Operation.TANH.getLabel().equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.TANH);
+            display = model.evaluate();
+            isFresh = true;
         } else if (Operation.SIN.getLabel().equals(label)) {
             model.pushNumber(display);
             model.pushOperation(Operation.SIN);
@@ -113,13 +125,13 @@ public class ControllerImpl implements Controller {
             model.pushNumber(display);
             display = model.evaluate();
             isFresh = true;
-        } else if (PI.equals(label)) {
+        } else if (Operation.RECALL_PI.getLabel().equals(label)) {
             String text = Double.toString(Math.PI);
             display = text.substring(0, Math.min(text.length(), DEFAULT_LENGTH));
-        } else if (RAND.equals(label)) {
+        } else if (Operation.RECALL_RAND.getLabel().equals(label)) {
             String text = Double.toString(Math.random());
             display = text.substring(0, Math.min(text.length(), DEFAULT_LENGTH));
-        } else if (E.equals(label)) {
+        } else if (Operation.RECALL_E.getLabel().equals(label)) {
             String text = Double.toString(Math.E);
             display = text.substring(0, Math.min(text.length(), DEFAULT_LENGTH));
         } else if (ALL_CLEAR.equals(label)) {
