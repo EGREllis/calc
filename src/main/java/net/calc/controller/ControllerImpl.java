@@ -55,6 +55,11 @@ public class ControllerImpl implements Controller {
             } else {
                 display = display + ".";
             }
+        } else if (Operation.FACTORIAL.getLabel().equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.FACTORIAL);
+            display = model.evaluate();
+            isFresh = true;
         } else if (Operation.SINH.getLabel().equals(label)) {
             model.pushNumber(display);
             model.pushOperation(Operation.SINH);

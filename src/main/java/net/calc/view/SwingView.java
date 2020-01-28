@@ -38,7 +38,7 @@ public class SwingView implements View {
                 {"2nd", Operation.SQUARE.getLabel(), Operation.CUBE.getLabel(), "x^y", "e^x", "10^x", "7", "8", "9", Operation.MULTIPLY.getLabel()},
                 {"1/x", Operation.SQUARE_ROOT.getLabel(), Operation.CUBE_ROOT.getLabel(), "x^1/y", "ln", "log10", "4", "5", "6", Operation.SUBTRACT.getLabel()},
                 {"x!", Operation.SIN.getLabel(), Operation.COS.getLabel(), Operation.TAN.getLabel(), Operation.RECALL_E.getLabel(), "EE", "1", "2", "3", Operation.ADD.getLabel()},
-                {"Rad", "sinh", "cosh", "tanh", Operation.RECALL_PI.getLabel(), Operation.RECALL_RAND.getLabel(), "0", ".", "="}
+                {"Rad", Operation.SINH.getLabel(), Operation.COSH.getLabel(), Operation.TANH.getLabel(), Operation.RECALL_PI.getLabel(), Operation.RECALL_RAND.getLabel(), "0", ".", "="}
         };
 
         for (int y = 0; y < labels.length; y++) {

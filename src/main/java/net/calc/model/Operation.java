@@ -10,6 +10,18 @@ public enum Operation {
     MEMORY_ADD(0, "M+"),
     MEMORY_SUBTRACT(0, "M-"),
     MEMORY_RECALL(0, "MR"),
+    FACTORIAL(1, "x!") {
+        String calculateSingleDouble(double first) {
+            return "Not a number";
+        }
+        String calculateSingleLong(long first) {
+            long result = 1;
+            for (long i = 2; i <= first; i++) {
+                result *= i;
+            }
+            return Long.toString(result);
+        }
+    },
     SINH(1, "sinh") {
         String calculateSingleDouble(double first) {
             return Double.toString(Math.sinh(first));
