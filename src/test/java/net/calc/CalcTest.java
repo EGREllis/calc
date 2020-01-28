@@ -2,10 +2,7 @@ package net.calc;
 
 import net.calc.controller.Controller;
 import net.calc.controller.ControllerImpl;
-import net.calc.model.Memory;
-import net.calc.model.MemoryImpl;
-import net.calc.model.Model;
-import net.calc.model.ModelImpl;
+import net.calc.model.*;
 import net.calc.view.SwingView;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +17,8 @@ public class CalcTest {
     public void setup() {
         Model model = new ModelImpl();
         Memory memory = new MemoryImpl();
-        Controller controller = new ControllerImpl(model, memory);
+        Display display = new DisplayImpl();
+        Controller controller = new ControllerImpl(model, memory, display);
         view = new SwingView(controller) {
             public void start() {
                 setDefaultClose(WindowConstants.DISPOSE_ON_CLOSE);
@@ -40,7 +38,7 @@ public class CalcTest {
     @Test
     public void when_digitsEntered_numberIsDisplayed() {
         pressButtons("1", "2", "3");
-        assert "123".equals(view.getDisplay());
+        assert "123".equals(view.getDisplay()) : view.getDisplay();
     }
 
     @Test
