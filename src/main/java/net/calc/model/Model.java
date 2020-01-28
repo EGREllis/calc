@@ -6,7 +6,7 @@ public interface Model {
     String evaluate();
     String getMemory();
     void pushNumber(String number);
-    void pushOperation(Operation operation);
+    void pushOperation(MathOperation mathOperation);
     void clear();
     void setController(Controller controller);
 }

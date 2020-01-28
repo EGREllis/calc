@@ -206,6 +206,16 @@ public class CalcTest {
         assertDisplay("0.7615941559557649");
     }
 
+    @Test
+    public void checkMemory() {
+        pressButtons("5", "M+", "AC", "MR");
+        assertDisplay("5");
+        pressButtons("3");
+        assertDisplay("3");
+        pressButtons("M-", "MR");
+        assertDisplay("2");
+    }
+
     private void assertDisplay(String expected) {
         assert expected.equals(view.getDisplay()) : String.format("Expected: %1$s Actual: %2$s", expected, view.getDisplay());
     }

@@ -2,24 +2,24 @@ package net.calc.model;
 
 public enum MemoryOperation {
     MEMORY_CLEAR("MC", null),
-    MEMORY_ADD("M+", Operation.ADD),
-    MEMORY_SUBTRACT("M-", Operation.SUBTRACT),
+    MEMORY_ADD("M+", MathOperation.ADD),
+    MEMORY_SUBTRACT("M-", MathOperation.SUBTRACT),
     MEMORY_RECALL("MR", null);
 
     String label;
-    Operation operation;
+    MathOperation mathOperation;
 
-    MemoryOperation(String label, Operation op) {
+    MemoryOperation(String label, MathOperation op) {
         this.label = label;
-        this.operation = op;
+        this.mathOperation = op;
     }
 
     public String getLabel() {
         return label;
     }
 
-    public Operation getOperation() {
-        return operation;
+    public MathOperation getMathOperation() {
+        return mathOperation;
     }
 
     public static MemoryOperation getOperationFrom(String label) {

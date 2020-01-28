@@ -2,7 +2,7 @@ package net.calc.view;
 
 import net.calc.controller.Controller;
 import net.calc.model.MemoryOperation;
-import net.calc.model.Operation;
+import net.calc.model.MathOperation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,11 +51,11 @@ public class SwingView implements View {
         constraints.gridwidth = 1;
 
         String[][] labels = new String[][]{
-                {"(", ")", MemoryOperation.MEMORY_CLEAR.getLabel(), MemoryOperation.MEMORY_ADD.getLabel(), MemoryOperation.MEMORY_SUBTRACT.getLabel(), MemoryOperation.MEMORY_RECALL.getLabel(), "AC", "+/-", Operation.PERCENTAGE.getLabel(), Operation.DIVIDE.getLabel()},
-                {"2nd", Operation.SQUARE.getLabel(), Operation.CUBE.getLabel(), "x^y", "e^x", "10^x", "7", "8", "9", Operation.MULTIPLY.getLabel()},
-                {Operation.RECIPROCAL.getLabel(), Operation.SQUARE_ROOT.getLabel(), Operation.CUBE_ROOT.getLabel(), "x^1/y", Operation.NATURAL_LOG.getLabel(), Operation.LOG_10.getLabel(), "4", "5", "6", Operation.SUBTRACT.getLabel()},
-                {Operation.FACTORIAL.getLabel(), Operation.SIN.getLabel(), Operation.COS.getLabel(), Operation.TAN.getLabel(), Operation.RECALL_E.getLabel(), "EE", "1", "2", "3", Operation.ADD.getLabel()},
-                {"Rad", Operation.SINH.getLabel(), Operation.COSH.getLabel(), Operation.TANH.getLabel(), Operation.RECALL_PI.getLabel(), Operation.RECALL_RAND.getLabel(), "0", ".", "="}
+                {"(", ")", MemoryOperation.MEMORY_CLEAR.getLabel(), MemoryOperation.MEMORY_ADD.getLabel(), MemoryOperation.MEMORY_SUBTRACT.getLabel(), MemoryOperation.MEMORY_RECALL.getLabel(), "AC", "+/-", MathOperation.PERCENTAGE.getLabel(), MathOperation.DIVIDE.getLabel()},
+                {"2nd", MathOperation.SQUARE.getLabel(), MathOperation.CUBE.getLabel(), "x^y", "e^x", "10^x", "7", "8", "9", MathOperation.MULTIPLY.getLabel()},
+                {MathOperation.RECIPROCAL.getLabel(), MathOperation.SQUARE_ROOT.getLabel(), MathOperation.CUBE_ROOT.getLabel(), "x^1/y", MathOperation.NATURAL_LOG.getLabel(), MathOperation.LOG_10.getLabel(), "4", "5", "6", MathOperation.SUBTRACT.getLabel()},
+                {MathOperation.FACTORIAL.getLabel(), MathOperation.SIN.getLabel(), MathOperation.COS.getLabel(), MathOperation.TAN.getLabel(), MathOperation.RECALL_E.getLabel(), "EE", "1", "2", "3", MathOperation.ADD.getLabel()},
+                {"Rad", MathOperation.SINH.getLabel(), MathOperation.COSH.getLabel(), MathOperation.TANH.getLabel(), MathOperation.RECALL_PI.getLabel(), MathOperation.RECALL_RAND.getLabel(), "0", ".", "="}
         };
 
         for (int y = 0; y < labels.length; y++) {

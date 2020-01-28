@@ -3,7 +3,7 @@ package net.calc.controller;
 import net.calc.model.Memory;
 import net.calc.model.MemoryOperation;
 import net.calc.model.Model;
-import net.calc.model.Operation;
+import net.calc.model.MathOperation;
 import net.calc.view.View;
 
 import java.util.regex.Matcher;
@@ -40,7 +40,7 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void buttonPressed(String label) {
-        Operation operation = Operation.getOperationFromLabel(label);
+        MathOperation mathOperation = MathOperation.getOperationFromLabel(label);
         MemoryOperation memoryOperation = MemoryOperation.getOperationFrom(label);
 
         Matcher digitMatcher = DIGIT.matcher(label);
@@ -77,23 +77,22 @@ public class ControllerImpl implements Controller {
             } else {
                 display = "-"+display;
             }
-        } else if (operation != null) {
-            if (operation.isStackOperation()) {
-                if (operation.getOperandCount() > 0) {
-                    model.pushNumber(display);
-                }
-                model.pushOperation(operation);
-                if (operation.getOperandCount() < 2) {
-                    display = model.evaluate();
-                }
-                isFresh = true;
+        } else if (mathOperation != null) {
+            if (mathOperation.getOperandCount() > 0) {
+                model.pushNumber(display);
             }
+            model.pushOperation(mathOperation);
+            if (mathOperation.getOperandCount() < 2) {
+                display = model.evaluate();
+            }
+            isFresh = true;
         } else if (memoryOperation != null) {
             if (MemoryOperation.MEMORY_RECALL.equals(memoryOperation)) {
                 display = memory.getMemory();
             } else {
                 memory.execute(memoryOperation, display);
             }
+            isFresh = true;
         }
         view.updateDisplay();
     }

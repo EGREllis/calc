@@ -20,9 +20,9 @@ public class MemoryImpl implements Memory {
             case MEMORY_ADD:
             case MEMORY_SUBTRACT:
                 Deque<String> stack = new LinkedList<>();
-                stack.add(memory);
                 stack.add(display);
-                operation.getOperation().evaluate(stack);
+                stack.add(memory);
+                operation.getMathOperation().evaluate(stack);
                 memory = stack.pop();
                 break;
             case MEMORY_RECALL:
