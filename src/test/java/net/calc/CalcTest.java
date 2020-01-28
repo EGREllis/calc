@@ -1,9 +1,10 @@
-package net.calc.view;
+package net.calc;
 
 import net.calc.controller.Controller;
 import net.calc.controller.ControllerImpl;
 import net.calc.model.Model;
 import net.calc.model.ModelImpl;
+import net.calc.view.SwingView;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -77,6 +78,78 @@ public class CalcTest {
         assertDisplay("2");
         pressButtons("=");
         assertDisplay("34");
+    }
+
+    @Test
+    public void checkE() {
+        pressButtons("e");
+        assertDisplay(Double.toString(Math.E));
+    }
+
+    @Test
+    public void checkPi() {
+        pressButtons("pi");
+        assertDisplay(Double.toString(Math.PI));
+    }
+
+    @Test
+    public void checkPercentage() {
+        pressButtons("9", "%");
+        assertDisplay("0.09");
+    }
+
+    @Test
+    public void checkFactoral() {
+        pressButtons("5", "x!");
+        assertDisplay("120");
+    }
+
+    @Test
+    public void checkReciprocal() {
+        pressButtons("2", "1/x");
+        assertDisplay("0.5");
+    }
+
+    @Test
+    public void checkSquare() {
+        pressButtons("3", "x^2");
+        assertDisplay("9");
+        pressButtons("x^2");
+        assertDisplay("81");
+    }
+
+    @Test
+    public void checkCube() {
+        pressButtons("2", "x^3");
+        assertDisplay("8");
+    }
+
+    @Test
+    public void checkSquareRoot() {
+        pressButtons("4", "x^1/2");
+        assertDisplay("2");
+    }
+
+    @Test
+    public void checkCubeRoot() {
+        pressButtons("2", "7", "x^1/3");
+        assertDisplay("3");
+    }
+
+    @Test
+    public void checkNaturalLog() {
+        pressButtons("e", "ln");
+        assertDisplay("1");
+        pressButtons("AC", "e", "x^2", "ln");
+        assertDisplay("2");
+    }
+
+    @Test
+    public void checkLog10() {
+        pressButtons("1", "0", "log");
+        assertDisplay("1");
+        pressButtons("AC", "1", "0", "0", "0", "log");
+        assertDisplay("3");
     }
 
     private void assertDisplay(String expected) {

@@ -82,7 +82,7 @@ public class SwingView implements View {
         window.pack();
     }
 
-    protected Map<String,JButton> getButtons() {
+    public Map<String,JButton> getButtons() {
         return Collections.unmodifiableMap(buttons);
     }
 
