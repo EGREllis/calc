@@ -43,6 +43,24 @@ public class CalcTest {
     }
 
     @Test
+    public void testBracket() {
+        pressButtons("8", "*");
+        assertDisplay("8");
+        pressButtons("(");
+        assertDisplay("8");
+        pressButtons("2");
+        assertDisplay("2");
+        pressButtons("+");
+        assertDisplay("2");
+        pressButtons("1");
+        assertDisplay("1");
+        pressButtons(")");
+        assertDisplay("3");
+        pressButtons("=");
+        assertDisplay("24");
+    }
+
+    @Test
     public void checkNumberToRoot() {
         pressButtons("9", "x^1/y");
         assertDisplay("9");
@@ -245,6 +263,8 @@ public class CalcTest {
         assertDisplay("3");
         pressButtons("M-", "MR");
         assertDisplay("2");
+        pressButtons("MC", "MR");
+        assertDisplay("0");
     }
 
     private void assertDisplay(String expected) {

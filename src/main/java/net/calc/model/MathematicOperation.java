@@ -3,6 +3,8 @@ package net.calc.model;
 import java.util.Deque;
 
 public enum MathematicOperation {
+    LEFT_BRACKET(0, "("),
+    RIGHT_BRACKET(0, ")"),
     RECALL_E(0, "e") {
         String calculate() {
             return Double.toString(Math.E);
