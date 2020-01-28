@@ -55,31 +55,6 @@ public class ControllerImpl implements Controller {
             } else {
                 display = display + ".";
             }
-        } else if (Operation.PERCENTAGE.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.PERCENTAGE);
-            display = model.evaluate();
-            isFresh = true;
-        } else if (Operation.LOG_10.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.LOG_10);
-            display = model.evaluate();
-            isFresh = true;
-        } else if (Operation.NATURAL_LOG.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.NATURAL_LOG);
-            display = model.evaluate();
-            isFresh = true;
-        } else if (Operation.RECIPROCAL.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.RECIPROCAL);
-            display = model.evaluate();
-            isFresh = true;
-        } else if (Operation.FACTORIAL.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.FACTORIAL);
-            display = model.evaluate();
-            isFresh = true;
         } else if (Operation.SINH.getLabel().equals(label)) {
             model.pushNumber(display);
             model.pushOperation(Operation.SINH);
@@ -109,42 +84,6 @@ public class ControllerImpl implements Controller {
             model.pushNumber(display);
             model.pushOperation(Operation.TAN);
             display = model.evaluate();
-            isFresh = true;
-        } else if (Operation.SQUARE.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.SQUARE);
-            display = model.evaluate();
-            isFresh = true;
-        } else if (Operation.CUBE.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.CUBE);
-            display = model.evaluate();
-            isFresh = true;
-        } else if (Operation.SQUARE_ROOT.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.SQUARE_ROOT);
-            display = model.evaluate();
-            isFresh = true;
-        } else if (Operation.CUBE_ROOT.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.CUBE_ROOT);
-            display = model.evaluate();
-            isFresh = true;
-        } else if (Operation.ADD.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.ADD);
-            isFresh = true;
-        } else if (Operation.SUBTRACT.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.SUBTRACT);
-            isFresh = true;
-        } else if (Operation.MULTIPLY.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.MULTIPLY);
-            isFresh = true;
-        } else if (Operation.DIVIDE.equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.DIVIDE);
             isFresh = true;
         } else if (EQUALS.equals(label)) {
             model.pushNumber(display);
@@ -223,10 +162,12 @@ public class ControllerImpl implements Controller {
             }
         } else {
             Operation operation = Operation.getOperationFromLabel(label);
-            if (operation.isStackOperation() && operation.getOperandCount() == 1) {
+            if (operation.isStackOperation()) {
                 model.pushNumber(display);
                 model.pushOperation(operation);
-                display = model.evaluate();
+                if (operation.getOperandCount() == 1) {
+                    display = model.evaluate();
+                }
                 isFresh = true;
             }
         }
