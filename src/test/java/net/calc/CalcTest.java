@@ -43,6 +43,38 @@ public class CalcTest {
     }
 
     @Test
+    public void checkNumberToRoot() {
+        pressButtons("9", "x^1/y");
+        assertDisplay("9");
+        pressButtons("2");
+        assertDisplay("2");
+        pressButtons("=");
+        assertDisplay("3");
+    }
+
+    @Test
+    public void checkToThePower() {
+        pressButtons("2","x^y");
+        assertDisplay("2");
+        pressButtons( "3");
+        assertDisplay("3");
+        pressButtons("=");
+        assertDisplay("8");
+    }
+
+    @Test
+    public void checkTenToPower() {
+        pressButtons("2", "10^x");
+        assertDisplay("100");
+    }
+
+    @Test
+    public void checkEToPower() {
+        pressButtons("1", "e^x");
+        assertDisplay(Double.toString(Math.E));
+    }
+
+    @Test
     public void checkAddition() {
         pressButtons("1", "0", "+");
         assertDisplay("10");

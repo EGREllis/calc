@@ -116,6 +116,38 @@ public enum MathematicOperation {
             return Double.toString(Math.tan(radians));
         }
     },
+    TEN_TO_POWER(1, "10^x") {
+        String calculateSingleDouble(double first) {
+            return Double.toString(Math.pow(10, first));
+        }
+        String calculateSingleLong(long first) {
+            return removeRedundantDecimals(Double.toString(Math.pow(10, first)));
+        }
+    },
+    E_TO_POWER(1, "e^x") {
+        String calculateSingleDouble(double first) {
+            return Double.toString(Math.pow(Math.E, first));
+        }
+        String calculateSingleLong(long first) {
+            return removeRedundantDecimals(Double.toString(Math.pow(Math.E, first)));
+        }
+    },
+    NUMBER_TO_ROOT(2, "x^1/y") {
+        String calculateDouble(double first, double second) {
+            return Double.toString(Math.pow(first, 1/second));
+        }
+        String calculateLong(long first, long second) {
+            return removeRedundantDecimals(Double.toString(Math.pow(first, 1.0/second)));
+        }
+    },
+    TO_THE_POWER(2, "x^y") {
+        String calculateDouble(double first, double second) {
+            return Double.toString(Math.pow(first, second));
+        }
+        String calculateLong(long first, long second) {
+            return removeRedundantDecimals(Double.toString(Math.pow(first, second)));
+        }
+    },
     ADD(2, "+") {
         String calculateDouble(double first, double second) {
             return Double.toString(first + second);
