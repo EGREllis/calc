@@ -10,6 +10,38 @@ public enum Operation {
     MEMORY_ADD(0, "M+"),
     MEMORY_SUBTRACT(0, "M-"),
     MEMORY_RECALL(0, "MR"),
+    PERCENTAGE(1, "%") {
+        String calculateSingleDouble(double first) {
+            return Double.toString(first/100);
+        }
+        String calculateSingleLong(long first) {
+            return removeRedundantDecimals(Double.toString(first/100.0));
+        }
+    },
+    LOG_10(1, "log") {
+        String calculateSingleDouble(double first) {
+            return Double.toString(Math.log10(first));
+        }
+        String calculateSingleLong(long first) {
+            return Double.toString(Math.log10(first));
+        }
+    },
+    NATURAL_LOG(1, "ln") {
+        String calculateSingleDouble(double first) {
+            return Double.toString(Math.log(first));
+        }
+        String calculateSingleLong(long first) {
+            return Double.toString(Math.log(first));
+        }
+    },
+    RECIPROCAL(1, "1/x") {
+        String calculateSingleDouble(double first) {
+            return Double.toString(1/first);
+        }
+        String calculateSingleLong(long first) {
+            return Double.toString(1.0/first);
+        }
+    },
     FACTORIAL(1, "x!") {
         String calculateSingleDouble(double first) {
             return "Not a number";

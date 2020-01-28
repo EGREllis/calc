@@ -55,6 +55,26 @@ public class ControllerImpl implements Controller {
             } else {
                 display = display + ".";
             }
+        } else if (Operation.PERCENTAGE.getLabel().equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.PERCENTAGE);
+            display = model.evaluate();
+            isFresh = true;
+        } else if (Operation.LOG_10.getLabel().equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.LOG_10);
+            display = model.evaluate();
+            isFresh = true;
+        } else if (Operation.NATURAL_LOG.getLabel().equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.NATURAL_LOG);
+            display = model.evaluate();
+            isFresh = true;
+        } else if (Operation.RECIPROCAL.getLabel().equals(label)) {
+            model.pushNumber(display);
+            model.pushOperation(Operation.RECIPROCAL);
+            display = model.evaluate();
+            isFresh = true;
         } else if (Operation.FACTORIAL.getLabel().equals(label)) {
             model.pushNumber(display);
             model.pushOperation(Operation.FACTORIAL);
