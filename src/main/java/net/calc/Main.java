@@ -13,7 +13,6 @@ public class Main {
         Memory memory = new MemoryImpl();
         Display display = new DisplayImpl();
         Controller controller = new ControllerImpl(mathematic, memory, display);
-        mathematic.setController(controller);
         View view = new SwingView(controller);
         controller.setView(view);
 

@@ -34,7 +34,6 @@ public class ControllerImpl implements Controller {
         MemoryOperation memoryOperation = MemoryOperation.getOperationFrom(label);
         DisplayOperation displayOperation = DisplayOperation.getOperationFrom(label);
 
-
         if (EQUALS.equals(label)) {
             mathematic.pushNumber(display.getDisplay());
             display.setDisplay(mathematic.evaluate());

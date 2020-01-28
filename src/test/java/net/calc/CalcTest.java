@@ -27,7 +27,6 @@ public class CalcTest {
             }
         };
         controller.setView(view);
-        mathematic.setController(controller);
         view.start();
     }
 
