@@ -221,6 +221,14 @@ public class ControllerImpl implements Controller {
                 double displayDouble = Double.parseDouble(display);
                 memory = "" + (memoryDouble - displayDouble);
             }
+        } else {
+            Operation operation = Operation.getOperationFromLabel(label);
+            if (operation.isStackOperation() && operation.getOperandCount() == 1) {
+                model.pushNumber(display);
+                model.pushOperation(operation);
+                display = model.evaluate();
+                isFresh = true;
+            }
         }
         view.updateDisplay();
     }

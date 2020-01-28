@@ -3,14 +3,14 @@ package net.calc.model;
 import java.util.Deque;
 
 public enum Operation {
-    RECALL_E(0, "e"),
-    RECALL_PI(0, "pi"),
-    RECALL_RAND(0, "Rand"),
-    MEMORY_CLEAR(0, "MC"),
-    MEMORY_ADD(0, "M+"),
-    MEMORY_SUBTRACT(0, "M-"),
-    MEMORY_RECALL(0, "MR"),
-    PERCENTAGE(1, "%") {
+    RECALL_E(0, "e", false),
+    RECALL_PI(0, "pi", false),
+    RECALL_RAND(0, "Rand", false),
+    MEMORY_CLEAR(0, "MC", false),
+    MEMORY_ADD(0, "M+", false),
+    MEMORY_SUBTRACT(0, "M-", false),
+    MEMORY_RECALL(0, "MR", false),
+    PERCENTAGE(1, "%", true) {
         String calculateSingleDouble(double first) {
             return Double.toString(first/100);
         }
@@ -18,7 +18,7 @@ public enum Operation {
             return removeRedundantDecimals(Double.toString(first/100.0));
         }
     },
-    LOG_10(1, "log") {
+    LOG_10(1, "log", true) {
         String calculateSingleDouble(double first) {
             return Double.toString(Math.log10(first));
         }
@@ -26,7 +26,7 @@ public enum Operation {
             return Double.toString(Math.log10(first));
         }
     },
-    NATURAL_LOG(1, "ln") {
+    NATURAL_LOG(1, "ln", true) {
         String calculateSingleDouble(double first) {
             return Double.toString(Math.log(first));
         }
@@ -34,7 +34,7 @@ public enum Operation {
             return Double.toString(Math.log(first));
         }
     },
-    RECIPROCAL(1, "1/x") {
+    RECIPROCAL(1, "1/x", true) {
         String calculateSingleDouble(double first) {
             return Double.toString(1/first);
         }
@@ -42,7 +42,7 @@ public enum Operation {
             return Double.toString(1.0/first);
         }
     },
-    FACTORIAL(1, "x!") {
+    FACTORIAL(1, "x!", true) {
         String calculateSingleDouble(double first) {
             return "Not a number";
         }
@@ -54,7 +54,7 @@ public enum Operation {
             return Long.toString(result);
         }
     },
-    SINH(1, "sinh") {
+    SINH(1, "sinh", true) {
         String calculateSingleDouble(double first) {
             return Double.toString(Math.sinh(first));
         }
@@ -62,7 +62,7 @@ public enum Operation {
             return Double.toString(Math.sinh(first));
         }
     },
-    COSH(1, "cosh") {
+    COSH(1, "cosh", true) {
         String calculateSingleDouble(double first) {
             return Double.toString(Math.cosh(first));
         }
@@ -70,7 +70,7 @@ public enum Operation {
             return Double.toString(Math.cosh(first));
         }
     },
-    TANH(1, "tanh") {
+    TANH(1, "tanh", true) {
         String calculateSingleDouble(double first) {
             return Double.toString(Math.tanh(first));
         }
@@ -78,7 +78,7 @@ public enum Operation {
             return Double.toString(Math.tanh(first));
         }
     },
-    SIN(1, "sin") {
+    SIN(1, "sin", true) {
         String calculateSingleDouble(double first) {
             return Double.toString(Math.sin(first));
         }
@@ -86,7 +86,7 @@ public enum Operation {
             return Double.toString(Math.sin(first * 1.0));
         }
     },
-    COS(1, "cos") {
+    COS(1, "cos", true) {
         String calculateSingleDouble(double first) {
             return Double.toString(Math.cos(first));
         }
@@ -94,7 +94,7 @@ public enum Operation {
             return Double.toString(Math.cos(first*1.0));
         }
     },
-    TAN(1, "tan") {
+    TAN(1, "tan", true) {
         String calculateSingleDouble(double first) {
             return Double.toString(Math.tan(first));
         }
@@ -102,7 +102,7 @@ public enum Operation {
             return Double.toString(Math.tan(first*1.0));
         }
     },
-    ADD(2, "+") {
+    ADD(2, "+", true) {
         String calculateDouble(double first, double second) {
             return Double.toString(first + second);
         }
@@ -111,7 +111,7 @@ public enum Operation {
             return Long.toString(first + second);
         }
     },
-    SUBTRACT(2, "-") {
+    SUBTRACT(2, "-", true) {
         String calculateDouble(double first, double second) {
             return Double.toString(first - second);
         }
@@ -120,7 +120,7 @@ public enum Operation {
             return Long.toString(first - second);
         }
     },
-    MULTIPLY(2, "*") {
+    MULTIPLY(2, "*", true) {
         String calculateDouble(double first, double second) {
             return Double.toString(first * second);
         }
@@ -129,7 +129,7 @@ public enum Operation {
             return Long.toString(first * second);
         }
     },
-    DIVIDE(2, "/") {
+    DIVIDE(2, "/", true) {
         String calculateDouble(double first, double second) {
             return Double.toString(first / second);
         }
@@ -138,7 +138,7 @@ public enum Operation {
             return Long.toString(first / second);
         }
     },
-    SQUARE(1, "x^2") {
+    SQUARE(1, "x^2", true) {
         String calculateSingleDouble(double first) {
             return Double.toString(Math.pow(first, 2));
         }
@@ -146,7 +146,7 @@ public enum Operation {
             return Long.toString((long)Math.pow(first, 2));
         }
     },
-    CUBE(1, "x^3") {
+    CUBE(1, "x^3", true) {
         String calculateSingleDouble(double first) {
             return Double.toString(Math.pow(first, 3));
         }
@@ -154,7 +154,7 @@ public enum Operation {
             return Long.toString((long)Math.pow(first, 3));
         }
     },
-    SQUARE_ROOT(1, "x^1/2") {
+    SQUARE_ROOT(1, "x^1/2", true) {
         String calculateSingleDouble(double first) {
             return Double.toString(Math.pow(first, 0.5));
         }
@@ -162,7 +162,7 @@ public enum Operation {
             return Double.toString(Math.pow(first, 0.5));
         }
     },
-    CUBE_ROOT(1, "x^1/3") {
+    CUBE_ROOT(1, "x^1/3", true) {
         String calculateSingleDouble(double first) {
             return Double.toString(Math.pow(first, 1.0/3));
         }
@@ -189,6 +189,11 @@ public enum Operation {
 
     private int operandCount;
     private String label;
+    private boolean isStackOperation;
+
+    public boolean isStackOperation() {
+        return isStackOperation;
+    }
 
     String calculateLong(long first, long second) {
         throw new IllegalStateException("Not implemented");
@@ -203,13 +208,18 @@ public enum Operation {
         throw new IllegalStateException("Not implemented");
     }
 
-    Operation(int operandCount, String label) {
+    Operation(int operandCount, String label, boolean isStackOperation) {
         this.operandCount = operandCount;
         this.label = label;
+        this.isStackOperation = isStackOperation;
     }
 
     public String getLabel() {
         return label;
+    }
+
+    public int getOperandCount() {
+        return operandCount;
     }
 
     public void evaluate(Deque<String> numbers) {

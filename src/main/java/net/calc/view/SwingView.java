@@ -8,18 +8,34 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SwingView implements View {
+    private int defaultClose = WindowConstants.EXIT_ON_CLOSE;
+    private final Map<String,JButton> buttons;
     private final Controller controller;
     private final JTextField display = new JTextField("0");
     private final JFrame window = new JFrame("Calculator");
 
     public SwingView(Controller controller) {
         this.controller = controller;
+        this.buttons = new HashMap<>();
     }
 
+    @Override
+    public String getDisplay() {
+        return display.getText();
+    }
+
+    protected void setDefaultClose(int defaultClose) {
+        this.defaultClose = defaultClose;
+    }
+
+    @Override
     public void start() {
+        window.setDefaultCloseOperation(defaultClose);
         window.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -58,18 +74,28 @@ public class SwingView implements View {
                 } else {
                     constraints.gridwidth = 1;
                 }
+                buttons.put(label, button);
                 window.add(button, constraints);
             }
         }
         window.setVisible(true);
         window.pack();
-        window.addWindowListener(new CloseApp());
     }
 
+    protected Map<String,JButton> getButtons() {
+        return Collections.unmodifiableMap(buttons);
+    }
+
+    @Override
     public void updateDisplay() {
         String newDisplay = controller.getDisplay();
         display.setText(newDisplay);
 
+    }
+
+    @Override
+    public void stop() {
+        window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
     }
 
     private class DummyActionListener implements ActionListener {
@@ -82,39 +108,6 @@ public class SwingView implements View {
         @Override
         public void actionPerformed(ActionEvent e) {
             SwingView.this.controller.buttonPressed(text);
-        }
-    }
-
-    private static class CloseApp implements WindowListener {
-        @Override
-        public void windowOpened(WindowEvent e) {
-        }
-
-        @Override
-        public void windowClosing(WindowEvent e) {
-            System.out.println("Closing application");
-            System.out.flush();
-            System.exit(0);
-        }
-
-        @Override
-        public void windowClosed(WindowEvent e) {
-        }
-
-        @Override
-        public void windowIconified(WindowEvent e) {
-        }
-
-        @Override
-        public void windowDeiconified(WindowEvent e) {
-        }
-
-        @Override
-        public void windowActivated(WindowEvent e) {
-        }
-
-        @Override
-        public void windowDeactivated(WindowEvent e) {
         }
     }
 }
