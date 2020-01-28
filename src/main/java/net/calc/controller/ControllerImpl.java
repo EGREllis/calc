@@ -56,6 +56,7 @@ public class ControllerImpl implements Controller {
         } else if (memoryOperation != null) {
             if (MemoryOperation.MEMORY_RECALL.equals(memoryOperation)) {
                 display.setDisplay(memory.getMemory());
+                display.setOperationPerformed(true);
             } else {
                 memory.execute(memoryOperation, display.getDisplay());
             }

@@ -1,6 +1,7 @@
 package net.calc.view;
 
 import net.calc.controller.Controller;
+import net.calc.model.DisplayOperation;
 import net.calc.model.MemoryOperation;
 import net.calc.model.MathOperation;
 
@@ -51,11 +52,11 @@ public class SwingView implements View {
         constraints.gridwidth = 1;
 
         String[][] labels = new String[][]{
-                {"(", ")", MemoryOperation.MEMORY_CLEAR.getLabel(), MemoryOperation.MEMORY_ADD.getLabel(), MemoryOperation.MEMORY_SUBTRACT.getLabel(), MemoryOperation.MEMORY_RECALL.getLabel(), "AC", "+/-", MathOperation.PERCENTAGE.getLabel(), MathOperation.DIVIDE.getLabel()},
-                {"2nd", MathOperation.SQUARE.getLabel(), MathOperation.CUBE.getLabel(), "x^y", "e^x", "10^x", "7", "8", "9", MathOperation.MULTIPLY.getLabel()},
-                {MathOperation.RECIPROCAL.getLabel(), MathOperation.SQUARE_ROOT.getLabel(), MathOperation.CUBE_ROOT.getLabel(), "x^1/y", MathOperation.NATURAL_LOG.getLabel(), MathOperation.LOG_10.getLabel(), "4", "5", "6", MathOperation.SUBTRACT.getLabel()},
-                {MathOperation.FACTORIAL.getLabel(), MathOperation.SIN.getLabel(), MathOperation.COS.getLabel(), MathOperation.TAN.getLabel(), MathOperation.RECALL_E.getLabel(), "EE", "1", "2", "3", MathOperation.ADD.getLabel()},
-                {"Rad", MathOperation.SINH.getLabel(), MathOperation.COSH.getLabel(), MathOperation.TANH.getLabel(), MathOperation.RECALL_PI.getLabel(), MathOperation.RECALL_RAND.getLabel(), "0", ".", "="}
+                {"(", ")", MemoryOperation.MEMORY_CLEAR.getLabel(), MemoryOperation.MEMORY_ADD.getLabel(), MemoryOperation.MEMORY_SUBTRACT.getLabel(), MemoryOperation.MEMORY_RECALL.getLabel(), "AC", DisplayOperation.PLUS_MINUS.getLabel(), MathOperation.PERCENTAGE.getLabel(), MathOperation.DIVIDE.getLabel()},
+                {"2nd", MathOperation.SQUARE.getLabel(), MathOperation.CUBE.getLabel(), "x^y", "e^x", "10^x", DisplayOperation.SEVEN.getLabel(), DisplayOperation.EIGHT.getLabel(), DisplayOperation.NINE.getLabel(), MathOperation.MULTIPLY.getLabel()},
+                {MathOperation.RECIPROCAL.getLabel(), MathOperation.SQUARE_ROOT.getLabel(), MathOperation.CUBE_ROOT.getLabel(), "x^1/y", MathOperation.NATURAL_LOG.getLabel(), MathOperation.LOG_10.getLabel(), DisplayOperation.FOUR.getLabel(), DisplayOperation.FIVE.getLabel(), DisplayOperation.SIX.getLabel(), MathOperation.SUBTRACT.getLabel()},
+                {MathOperation.FACTORIAL.getLabel(), MathOperation.SIN.getLabel(), MathOperation.COS.getLabel(), MathOperation.TAN.getLabel(), MathOperation.RECALL_E.getLabel(), "EE", DisplayOperation.ONE.getLabel(), DisplayOperation.TWO.getLabel(), DisplayOperation.THREE.getLabel(), MathOperation.ADD.getLabel()},
+                {"Rad", MathOperation.SINH.getLabel(), MathOperation.COSH.getLabel(), MathOperation.TANH.getLabel(), MathOperation.RECALL_PI.getLabel(), MathOperation.RECALL_RAND.getLabel(), DisplayOperation.ZERO.getLabel(), DisplayOperation.POINT.getLabel(), "="}
         };
 
         for (int y = 0; y < labels.length; y++) {
