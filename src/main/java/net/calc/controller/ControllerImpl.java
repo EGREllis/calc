@@ -1,6 +1,7 @@
 package net.calc.controller;
 
 import net.calc.model.*;
+import net.calc.model.Mathematic;
 import net.calc.view.View;
 
 public class ControllerImpl implements Controller {
@@ -10,10 +11,10 @@ public class ControllerImpl implements Controller {
     private Display display;
     private Memory memory;
 
-    private final Model model;
+    private final Mathematic mathematic;
 
-    public ControllerImpl(Model model, Memory memory, Display display) {
-        this.model = model;
+    public ControllerImpl(Mathematic mathematic, Memory memory, Display display) {
+        this.mathematic = mathematic;
         this.memory = memory;
         this.display = display;
     }
@@ -29,28 +30,28 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void buttonPressed(String label) {
-        MathOperation mathOperation = MathOperation.getOperationFromLabel(label);
+        MathematicOperation mathematicOperation = MathematicOperation.getOperationFromLabel(label);
         MemoryOperation memoryOperation = MemoryOperation.getOperationFrom(label);
         DisplayOperation displayOperation = DisplayOperation.getOperationFrom(label);
 
 
         if (EQUALS.equals(label)) {
-            model.pushNumber(display.getDisplay());
-            display.setDisplay(model.evaluate());
+            mathematic.pushNumber(display.getDisplay());
+            display.setDisplay(mathematic.evaluate());
             display.setOperationPerformed(true);
         } else if (ALL_CLEAR.equals(label)) {
             //TODO: Toggle to clear (needs to be investigated)
             display.clear();
-            model.clear();
+            mathematic.clear();
         } else if (displayOperation != null) {
             display.execute(displayOperation);
-        } else if (mathOperation != null) {
-            if (mathOperation.getOperandCount() > 0) {
-                model.pushNumber(display.getDisplay());
+        } else if (mathematicOperation != null) {
+            if (mathematicOperation.getOperandCount() > 0) {
+                mathematic.pushNumber(display.getDisplay());
             }
-            model.pushOperation(mathOperation);
-            if (mathOperation.getOperandCount() < 2) {
-                display.setDisplay(model.evaluate());
+            mathematic.pushOperation(mathematicOperation);
+            if (mathematicOperation.getOperandCount() < 2) {
+                display.setDisplay(mathematic.evaluate());
             }
             display.setOperationPerformed(true);
         } else if (memoryOperation != null) {

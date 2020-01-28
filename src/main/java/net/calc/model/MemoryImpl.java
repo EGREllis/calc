@@ -22,7 +22,7 @@ public class MemoryImpl implements Memory {
                 Deque<String> stack = new LinkedList<>();
                 stack.add(display);
                 stack.add(memory);
-                operation.getMathOperation().evaluate(stack);
+                operation.getMathematicOperation().evaluate(stack);
                 memory = stack.pop();
                 break;
             case MEMORY_RECALL:

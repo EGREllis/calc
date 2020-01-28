@@ -5,22 +5,16 @@ import net.calc.controller.Controller;
 import java.util.Deque;
 import java.util.LinkedList;
 
-public class ModelImpl implements Model {
+public class MathematicImpl implements Mathematic {
     private Controller controller;
     private Deque<String> numbers = new LinkedList<>();
-    private MathOperation mathOperation = null;
-    private String memory = "0";
+    private MathematicOperation mathematicOperation = null;
 
     @Override
     public String evaluate() {
-        this.mathOperation.evaluate(numbers);
-        mathOperation = null;
+        this.mathematicOperation.evaluate(numbers);
+        mathematicOperation = null;
         return numbers.pop();
-    }
-
-    @Override
-    public String getMemory() {
-        return memory;
     }
 
     @Override
@@ -29,12 +23,12 @@ public class ModelImpl implements Model {
     }
 
     @Override
-    public void pushOperation(MathOperation mathOperation) {
-        if (this.mathOperation == null) {
-            this.mathOperation = mathOperation;
+    public void pushOperation(MathematicOperation mathematicOperation) {
+        if (this.mathematicOperation == null) {
+            this.mathematicOperation = mathematicOperation;
         } else {
-            this.mathOperation.evaluate(numbers);
-            this.mathOperation = mathOperation;
+            this.mathematicOperation.evaluate(numbers);
+            this.mathematicOperation = mathematicOperation;
             controller.updateDisplay(numbers.peek());
         }
     }
@@ -42,7 +36,7 @@ public class ModelImpl implements Model {
     @Override
     public void clear() {
         numbers.clear();
-        mathOperation = null;
+        mathematicOperation = null;
     }
 
     @Override

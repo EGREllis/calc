@@ -3,6 +3,7 @@ package net.calc;
 import net.calc.controller.Controller;
 import net.calc.controller.ControllerImpl;
 import net.calc.model.*;
+import net.calc.model.Mathematic;
 import net.calc.view.SwingView;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,10 +16,10 @@ public class CalcTest {
 
     @Before
     public void setup() {
-        Model model = new ModelImpl();
+        Mathematic mathematic = new MathematicImpl();
         Memory memory = new MemoryImpl();
         Display display = new DisplayImpl();
-        Controller controller = new ControllerImpl(model, memory, display);
+        Controller controller = new ControllerImpl(mathematic, memory, display);
         view = new SwingView(controller) {
             public void start() {
                 setDefaultClose(WindowConstants.DISPOSE_ON_CLOSE);
@@ -26,7 +27,7 @@ public class CalcTest {
             }
         };
         controller.setView(view);
-        model.setController(controller);
+        mathematic.setController(controller);
         view.start();
     }
 
@@ -84,13 +85,13 @@ public class CalcTest {
     @Test
     public void checkE() {
         pressButtons("e");
-        assertDisplay(Double.toString(Math.E));
+        assertDisplay(Double.toString(java.lang.Math.E));
     }
 
     @Test
     public void checkPi() {
         pressButtons("pi");
-        assertDisplay(Double.toString(Math.PI));
+        assertDisplay(Double.toString(java.lang.Math.PI));
     }
 
     @Test

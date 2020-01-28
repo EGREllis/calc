@@ -2,7 +2,7 @@ package net.calc.model;
 
 import java.util.Deque;
 
-public enum MathOperation {
+public enum MathematicOperation {
     RECALL_E(0, "e") {
         String calculate() {
             return Double.toString(Math.E);
@@ -157,7 +157,7 @@ public enum MathOperation {
             return Double.toString(Math.pow(first, 2));
         }
         String calculateSingleLong(long first) {
-            return Long.toString((long)Math.pow(first, 2));
+            return Long.toString((long) Math.pow(first, 2));
         }
     },
     CUBE(1, "x^3") {
@@ -165,7 +165,7 @@ public enum MathOperation {
             return Double.toString(Math.pow(first, 3));
         }
         String calculateSingleLong(long first) {
-            return Long.toString((long)Math.pow(first, 3));
+            return Long.toString((long) Math.pow(first, 3));
         }
     },
     SQUARE_ROOT(1, "x^1/2") {
@@ -221,7 +221,7 @@ public enum MathOperation {
         throw new IllegalStateException("Not implemented");
     }
 
-    MathOperation(int operandCount, String label) {
+    MathematicOperation(int operandCount, String label) {
         this.operandCount = operandCount;
         this.label = label;
     }
@@ -288,9 +288,9 @@ public enum MathOperation {
 
     }
 
-    public static MathOperation getOperationFromLabel(String label) {
-        MathOperation result = null;
-        for (MathOperation op : values()) {
+    public static MathematicOperation getOperationFromLabel(String label) {
+        MathematicOperation result = null;
+        for (MathematicOperation op : values()) {
             if (op.getLabel().equals(label)) {
                 result = op;
                 break;
