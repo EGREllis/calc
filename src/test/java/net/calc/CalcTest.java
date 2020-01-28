@@ -152,6 +152,28 @@ public class CalcTest {
         assertDisplay("3");
     }
 
+    @Test
+    public void checkSin() {
+        pressButtons("0", "sin");
+        assertDisplay("0");
+        pressButtons("AC", "9", "0", "sin");
+        assertDisplay("1");
+    }
+
+    @Test
+    public void checkCos() {
+        pressButtons("0", "cos");
+        assertDisplay("1");
+        pressButtons("AC", "9", "0", "cos");
+        assertDisplay("6.123233995736766E-17"); // Should be 0, but degree to radians!
+    }
+
+    @Test
+    public void checkTan() {
+        pressButtons("4", "5", "tan");
+        assertDisplay("0.9999999999999999");    // Should be 1, but degrees to radians!
+    }
+
     private void assertDisplay(String expected) {
         assert expected.equals(view.getDisplay()) : String.format("Expected: %1$s Actual: %2$s", expected, view.getDisplay());
     }

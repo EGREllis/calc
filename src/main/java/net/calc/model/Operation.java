@@ -80,26 +80,32 @@ public enum Operation {
     },
     SIN(1, "sin", true) {
         String calculateSingleDouble(double first) {
-            return Double.toString(Math.sin(first));
+            double radians = convertDegreesToRadians(first);
+            return Double.toString(Math.sin(radians));
         }
         String calculateSingleLong(long first) {
-            return Double.toString(Math.sin(first * 1.0));
+            double radians = convertDegreesToRadians(first);
+            return Double.toString(Math.sin(radians));
         }
     },
     COS(1, "cos", true) {
         String calculateSingleDouble(double first) {
-            return Double.toString(Math.cos(first));
+            double radians = convertDegreesToRadians(first);
+            return Double.toString(Math.cos(radians));
         }
         String calculateSingleLong(long first) {
-            return Double.toString(Math.cos(first*1.0));
+            double radians = convertDegreesToRadians(first);
+            return Double.toString(Math.cos(radians));
         }
     },
     TAN(1, "tan", true) {
         String calculateSingleDouble(double first) {
-            return Double.toString(Math.tan(first));
+            double radians = convertDegreesToRadians(first);
+            return Double.toString(Math.tan(radians));
         }
         String calculateSingleLong(long first) {
-            return Double.toString(Math.tan(first*1.0));
+            double radians = convertDegreesToRadians(first);
+            return Double.toString(Math.tan(radians));
         }
     },
     ADD(2, "+", true) {
@@ -283,5 +289,9 @@ public enum Operation {
             }
         }
         return result;
+    }
+
+    private static double convertDegreesToRadians(double degrees) {
+        return degrees * Math.PI / 180;
     }
 }

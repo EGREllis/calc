@@ -70,21 +70,6 @@ public class ControllerImpl implements Controller {
             model.pushOperation(Operation.TANH);
             display = model.evaluate();
             isFresh = true;
-        } else if (Operation.SIN.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.SIN);
-            display = model.evaluate();
-            isFresh = true;
-        } else if (Operation.COS.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.COS);
-            display = model.evaluate();
-            isFresh = true;
-        } else if (Operation.TAN.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.TAN);
-            display = model.evaluate();
-            isFresh = true;
         } else if (EQUALS.equals(label)) {
             model.pushNumber(display);
             display = model.evaluate();
