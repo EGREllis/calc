@@ -2,6 +2,8 @@ package net.calc;
 
 import net.calc.controller.Controller;
 import net.calc.controller.ControllerImpl;
+import net.calc.model.Memory;
+import net.calc.model.MemoryImpl;
 import net.calc.model.Model;
 import net.calc.model.ModelImpl;
 import net.calc.view.SwingView;
@@ -17,7 +19,8 @@ public class CalcTest {
     @Before
     public void setup() {
         Model model = new ModelImpl();
-        Controller controller = new ControllerImpl(model);
+        Memory memory = new MemoryImpl();
+        Controller controller = new ControllerImpl(model, memory);
         view = new SwingView(controller) {
             public void start() {
                 setDefaultClose(WindowConstants.DISPOSE_ON_CLOSE);
@@ -183,6 +186,24 @@ public class CalcTest {
     public void checkTan() {
         pressButtons("4", "5", "tan");
         assertDisplay("0.9999999999999999");    // Should be 1, but degrees to radians!
+    }
+
+    @Test
+    public void checkSinh() {
+        pressButtons("1", "sinh");
+        assertDisplay("1.1752011936438014");
+    }
+
+    @Test
+    public void checkCosh() {
+        pressButtons("1", "cosh");
+        assertDisplay("1.543080634815244");
+    }
+
+    @Test
+    public void checkTanh() {
+        pressButtons("1", "tanh");
+        assertDisplay("0.7615941559557649");
     }
 
     private void assertDisplay(String expected) {

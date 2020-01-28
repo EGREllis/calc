@@ -9,12 +9,18 @@ public class ModelImpl implements Model {
     private Controller controller;
     private Deque<String> numbers = new LinkedList<>();
     private Operation operation = null;
+    private String memory = "0";
 
     @Override
     public String evaluate() {
         this.operation.evaluate(numbers);
         operation = null;
         return numbers.pop();
+    }
+
+    @Override
+    public String getMemory() {
+        return memory;
     }
 
     @Override

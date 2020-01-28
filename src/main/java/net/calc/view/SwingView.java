@@ -1,6 +1,7 @@
 package net.calc.view;
 
 import net.calc.controller.Controller;
+import net.calc.model.MemoryOperation;
 import net.calc.model.Operation;
 
 import javax.swing.*;
@@ -50,7 +51,7 @@ public class SwingView implements View {
         constraints.gridwidth = 1;
 
         String[][] labels = new String[][]{
-                {"(", ")", Operation.MEMORY_CLEAR.getLabel(), Operation.MEMORY_ADD.getLabel(), Operation.MEMORY_SUBTRACT.getLabel(), Operation.MEMORY_RECALL.getLabel(), "AC", "+/-", Operation.PERCENTAGE.getLabel(), Operation.DIVIDE.getLabel()},
+                {"(", ")", MemoryOperation.MEMORY_CLEAR.getLabel(), MemoryOperation.MEMORY_ADD.getLabel(), MemoryOperation.MEMORY_SUBTRACT.getLabel(), MemoryOperation.MEMORY_RECALL.getLabel(), "AC", "+/-", Operation.PERCENTAGE.getLabel(), Operation.DIVIDE.getLabel()},
                 {"2nd", Operation.SQUARE.getLabel(), Operation.CUBE.getLabel(), "x^y", "e^x", "10^x", "7", "8", "9", Operation.MULTIPLY.getLabel()},
                 {Operation.RECIPROCAL.getLabel(), Operation.SQUARE_ROOT.getLabel(), Operation.CUBE_ROOT.getLabel(), "x^1/y", Operation.NATURAL_LOG.getLabel(), Operation.LOG_10.getLabel(), "4", "5", "6", Operation.SUBTRACT.getLabel()},
                 {Operation.FACTORIAL.getLabel(), Operation.SIN.getLabel(), Operation.COS.getLabel(), Operation.TAN.getLabel(), Operation.RECALL_E.getLabel(), "EE", "1", "2", "3", Operation.ADD.getLabel()},

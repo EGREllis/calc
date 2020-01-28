@@ -1,5 +1,7 @@
 package net.calc.controller;
 
+import net.calc.model.Memory;
+import net.calc.model.MemoryOperation;
 import net.calc.model.Model;
 import net.calc.model.Operation;
 import net.calc.view.View;
@@ -18,12 +20,13 @@ public class ControllerImpl implements Controller {
     private boolean isFresh = true;
     private View view;
     private volatile String display = "0";
-    private String memory = "0";
+    private Memory memory;
 
     private final Model model;
 
-    public ControllerImpl(Model model) {
+    public ControllerImpl(Model model, Memory memory) {
         this.model = model;
+        this.memory = memory;
     }
 
     @Override
@@ -37,6 +40,9 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void buttonPressed(String label) {
+        Operation operation = Operation.getOperationFromLabel(label);
+        MemoryOperation memoryOperation = MemoryOperation.getOperationFrom(label);
+
         Matcher digitMatcher = DIGIT.matcher(label);
         if (digitMatcher.matches()) {
             if (isFresh) {
@@ -55,21 +61,6 @@ public class ControllerImpl implements Controller {
             } else {
                 display = display + ".";
             }
-        } else if (Operation.SINH.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.SINH);
-            display = model.evaluate();
-            isFresh = true;
-        } else if (Operation.COSH.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.COSH);
-            display = model.evaluate();
-            isFresh = true;
-        } else if (Operation.TANH.getLabel().equals(label)) {
-            model.pushNumber(display);
-            model.pushOperation(Operation.TANH);
-            display = model.evaluate();
-            isFresh = true;
         } else if (EQUALS.equals(label)) {
             model.pushNumber(display);
             display = model.evaluate();
@@ -86,58 +77,7 @@ public class ControllerImpl implements Controller {
             } else {
                 display = "-"+display;
             }
-        } else if (Operation.MEMORY_RECALL.getLabel().equals(label)) {
-            display = memory;
-        } else if (Operation.MEMORY_CLEAR.getLabel().equals(label)) {
-            memory = "0";
-        } else if (Operation.MEMORY_ADD.getLabel().equals(label)) {
-            boolean isDisplayLong = true;
-            long displayLong = 0L;
-            try {
-                displayLong = Long.parseLong(display);
-            } catch (NumberFormatException nfe) {
-                isDisplayLong = false;
-            }
-            boolean isMemoryLong = true;
-            long memoryLong = 0L;
-            try {
-                memoryLong = Long.parseLong(memory);
-            } catch(NumberFormatException nfe) {
-                isMemoryLong = false;
-            }
-
-            if (isMemoryLong && isDisplayLong) {
-                memory = ""+(memoryLong + displayLong);
-            } else {
-                double memoryDouble = Double.parseDouble(memory);
-                double displayDouble = Double.parseDouble(display);
-                memory = "" + (memoryDouble + displayDouble);
-            }
-        } else if (Operation.MEMORY_SUBTRACT.getLabel().equals(label)) {
-            boolean isDisplayLong = true;
-            long displayLong = 0L;
-            try {
-                displayLong = Long.parseLong(display);
-            } catch (NumberFormatException nfe) {
-                isDisplayLong = false;
-            }
-            boolean isMemoryLong = true;
-            long memoryLong = 0L;
-            try {
-                memoryLong = Long.parseLong(memory);
-            } catch(NumberFormatException nfe) {
-                isMemoryLong = false;
-            }
-
-            if (isMemoryLong && isDisplayLong) {
-                memory = ""+(memoryLong - displayLong);
-            } else {
-                double memoryDouble = Double.parseDouble(memory);
-                double displayDouble = Double.parseDouble(display);
-                memory = "" + (memoryDouble - displayDouble);
-            }
-        } else {
-            Operation operation = Operation.getOperationFromLabel(label);
+        } else if (operation != null) {
             if (operation.isStackOperation()) {
                 if (operation.getOperandCount() > 0) {
                     model.pushNumber(display);
@@ -147,6 +87,12 @@ public class ControllerImpl implements Controller {
                     display = model.evaluate();
                 }
                 isFresh = true;
+            }
+        } else if (memoryOperation != null) {
+            if (MemoryOperation.MEMORY_RECALL.equals(memoryOperation)) {
+                display = memory.getMemory();
+            } else {
+                memory.execute(memoryOperation, display);
             }
         }
         view.updateDisplay();
