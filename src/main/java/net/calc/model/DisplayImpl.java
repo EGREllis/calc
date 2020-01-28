@@ -16,7 +16,7 @@ public class DisplayImpl implements Display {
 
     @Override
     public void execute(DisplayOperation operation) {
-        operation.evalate(this);
+        operation.evaluate(this);
     }
 
     @Override

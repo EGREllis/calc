@@ -33,7 +33,29 @@ public class CalcTest {
 
     @Test
     public void when_calculatorStarted_then_displaysZero() {
-        assert "0".equals(view.getDisplay());
+        assertDisplay("0");
+    }
+
+    @Test
+    public void checkPlusMinus() {
+        pressButtons("1", "+/-");
+        assertDisplay("-1");
+        pressButtons("+/-");
+        assertDisplay("1");
+        pressButtons("+/-");
+        assertDisplay("-1");
+    }
+
+    @Test
+    public void when_decimalPointPressed_then_displayed() {
+        pressButtons(".");
+        assertDisplay("0.");
+    }
+
+    @Test
+    public void when_decimalPointPressedTwice_then_onlyOnePointDisplayed() {
+        pressButtons(".", ".", "0", ".");
+        assertDisplay("0.0");
     }
 
     @Test

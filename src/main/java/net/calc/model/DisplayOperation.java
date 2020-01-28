@@ -9,11 +9,12 @@ public enum DisplayOperation {
                 //TODO: Add warning beep!
             } else {
                 display.setDisplay(display.getDisplay()+".");
+                display.setOperationPerformed(false);
             }
         }
     },
     PLUS_MINUS("+/-", false) {
-        public void evalute(Display display) {
+        public void evaluate(Display display) {
             String text = display.getDisplay();
             if (text.equals(ZERO.getLabel())) {
                 // Do nothing
@@ -47,7 +48,7 @@ public enum DisplayOperation {
         return label;
     }
 
-    public void evalate(Display display) {
+    public void evaluate(Display display) {
         if (isDigit) {
             if (display.isOperationPerformed()) {
                 display.setDisplay(label);
