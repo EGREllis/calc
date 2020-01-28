@@ -3,9 +3,21 @@ package net.calc.model;
 import java.util.Deque;
 
 public enum Operation {
-    RECALL_E(0, "e", false),
-    RECALL_PI(0, "pi", false),
-    RECALL_RAND(0, "Rand", false),
+    RECALL_E(0, "e", true) {
+        String calculate() {
+            return Double.toString(Math.E);
+        }
+    },
+    RECALL_PI(0, "pi", true) {
+        String calculate() {
+            return Double.toString(Math.PI);
+        }
+    },
+    RECALL_RAND(0, "Rand", true) {
+        String calculate() {
+            return Double.toString(Math.random());
+        }
+    },
     MEMORY_CLEAR(0, "MC", false),
     MEMORY_ADD(0, "M+", false),
     MEMORY_SUBTRACT(0, "M-", false),
@@ -201,6 +213,10 @@ public enum Operation {
         return isStackOperation;
     }
 
+    String calculate() {
+        throw new IllegalStateException("Not implemented");
+    }
+
     String calculateLong(long first, long second) {
         throw new IllegalStateException("Not implemented");
     }
@@ -274,6 +290,8 @@ public enum Operation {
                 result = removeRedundantDecimals(calculateSingleDouble(firstDouble));
             }
             numbers.push(result);
+        } else if (operandCount == 0) {
+            numbers.push(calculate());
         } else {
             throw new IllegalStateException("This should never be executed! (operandCount = "+operandCount+")");
         }

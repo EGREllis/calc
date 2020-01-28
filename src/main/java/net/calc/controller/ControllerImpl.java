@@ -74,15 +74,6 @@ public class ControllerImpl implements Controller {
             model.pushNumber(display);
             display = model.evaluate();
             isFresh = true;
-        } else if (Operation.RECALL_PI.getLabel().equals(label)) {
-            String text = Double.toString(Math.PI);
-            display = text.substring(0, Math.min(text.length(), DEFAULT_LENGTH));
-        } else if (Operation.RECALL_RAND.getLabel().equals(label)) {
-            String text = Double.toString(Math.random());
-            display = text.substring(0, Math.min(text.length(), DEFAULT_LENGTH));
-        } else if (Operation.RECALL_E.getLabel().equals(label)) {
-            String text = Double.toString(Math.E);
-            display = text.substring(0, Math.min(text.length(), DEFAULT_LENGTH));
         } else if (ALL_CLEAR.equals(label)) {
             //TODO: Toggle to clear (needs to be investigated)
             display = "0";
@@ -148,9 +139,11 @@ public class ControllerImpl implements Controller {
         } else {
             Operation operation = Operation.getOperationFromLabel(label);
             if (operation.isStackOperation()) {
-                model.pushNumber(display);
+                if (operation.getOperandCount() > 0) {
+                    model.pushNumber(display);
+                }
                 model.pushOperation(operation);
-                if (operation.getOperandCount() == 1) {
+                if (operation.getOperandCount() < 2) {
                     display = model.evaluate();
                 }
                 isFresh = true;

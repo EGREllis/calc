@@ -93,6 +93,17 @@ public class CalcTest {
     }
 
     @Test
+    public void checkRandom() {
+        pressButtons("Rand");
+        double first = Double.parseDouble(view.getDisplay());
+        assert first >= 0 && first <= 1;
+        pressButtons("Rand");
+        double second = Double.parseDouble(view.getDisplay());
+        assert second >= 0 && second <= 1;
+        assert first != second;
+    }
+
+    @Test
     public void checkPercentage() {
         pressButtons("9", "%");
         assertDisplay("0.09");
