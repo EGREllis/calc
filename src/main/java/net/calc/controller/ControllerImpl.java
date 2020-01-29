@@ -2,10 +2,8 @@ package net.calc.controller;
 
 import net.calc.model.*;
 import net.calc.model.Mathematic;
-import net.calc.view.View;
 
 public class ControllerImpl implements Controller {
-    private View view;
     private Display display;
     private Memory memory;
 
@@ -22,12 +20,8 @@ public class ControllerImpl implements Controller {
         return display.getDisplay();
     }
 
-    public void setView(View view) {
-        this.view = view;
-    }
-
     @Override
-    public void buttonPressed(String label) {
+    public String buttonPressed(String label) {
         MathematicOperation mathematicOperation = MathematicOperation.getOperationFromLabel(label);
         MemoryOperation memoryOperation = MemoryOperation.getOperationFrom(label);
         DisplayOperation displayOperation = DisplayOperation.getOperationFrom(label);
@@ -55,16 +49,6 @@ public class ControllerImpl implements Controller {
             }
             display.setOperationPerformed(true);
         }
-        view.updateDisplay();
-    }
-
-    @Override
-    public void updateDisplay(String label) {
-        view.updateDisplay();
-    }
-
-    @Override
-    public void shutdown() {
-        // This should get called when the window is closed.
+        return display.getDisplay();
     }
 }

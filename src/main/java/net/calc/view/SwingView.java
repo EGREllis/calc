@@ -110,7 +110,8 @@ public class SwingView implements View {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            SwingView.this.controller.buttonPressed(text);
+            String newDisplay = SwingView.this.controller.buttonPressed(text);
+            display.setText(newDisplay);
         }
     }
 }

@@ -26,7 +26,6 @@ public class CalcTest {
                 super.start();
             }
         };
-        controller.setView(view);
         view.start();
     }
 

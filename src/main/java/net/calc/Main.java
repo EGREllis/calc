@@ -14,7 +14,6 @@ public class Main {
         Display display = new DisplayImpl();
         Controller controller = new ControllerImpl(mathematic, memory, display);
         View view = new SwingView(controller);
-        controller.setView(view);
 
         view.start();
     }
