@@ -1,6 +1,7 @@
 package net.calc.view;
 
 import net.calc.controller.Controller;
+import net.calc.controller.ControllerOperation;
 import net.calc.model.DisplayOperation;
 import net.calc.model.MemoryOperation;
 import net.calc.model.MathematicOperation;
@@ -52,11 +53,11 @@ public class SwingView implements View {
         constraints.gridwidth = 1;
 
         String[][] labels = new String[][]{
-                {MathematicOperation.LEFT_BRACKET.getLabel(), MathematicOperation.RIGHT_BRACKET.getLabel(), MemoryOperation.MEMORY_CLEAR.getLabel(), MemoryOperation.MEMORY_ADD.getLabel(), MemoryOperation.MEMORY_SUBTRACT.getLabel(), MemoryOperation.MEMORY_RECALL.getLabel(), "AC", DisplayOperation.PLUS_MINUS.getLabel(), MathematicOperation.PERCENTAGE.getLabel(), MathematicOperation.DIVIDE.getLabel()},
+                {MathematicOperation.LEFT_BRACKET.getLabel(), MathematicOperation.RIGHT_BRACKET.getLabel(), MemoryOperation.MEMORY_CLEAR.getLabel(), MemoryOperation.MEMORY_ADD.getLabel(), MemoryOperation.MEMORY_SUBTRACT.getLabel(), MemoryOperation.MEMORY_RECALL.getLabel(), ControllerOperation.ALL_CLEAR.getLabel(), DisplayOperation.PLUS_MINUS.getLabel(), MathematicOperation.PERCENTAGE.getLabel(), MathematicOperation.DIVIDE.getLabel()},
                 {"2nd", MathematicOperation.SQUARE.getLabel(), MathematicOperation.CUBE.getLabel(), MathematicOperation.TO_THE_POWER.getLabel(), MathematicOperation.E_TO_POWER.getLabel(), MathematicOperation.TEN_TO_POWER.getLabel(), DisplayOperation.SEVEN.getLabel(), DisplayOperation.EIGHT.getLabel(), DisplayOperation.NINE.getLabel(), MathematicOperation.MULTIPLY.getLabel()},
                 {MathematicOperation.RECIPROCAL.getLabel(), MathematicOperation.SQUARE_ROOT.getLabel(), MathematicOperation.CUBE_ROOT.getLabel(), MathematicOperation.NUMBER_TO_ROOT.getLabel(), MathematicOperation.NATURAL_LOG.getLabel(), MathematicOperation.LOG_10.getLabel(), DisplayOperation.FOUR.getLabel(), DisplayOperation.FIVE.getLabel(), DisplayOperation.SIX.getLabel(), MathematicOperation.SUBTRACT.getLabel()},
                 {MathematicOperation.FACTORIAL.getLabel(), MathematicOperation.SIN.getLabel(), MathematicOperation.COS.getLabel(), MathematicOperation.TAN.getLabel(), MathematicOperation.RECALL_E.getLabel(), "EE", DisplayOperation.ONE.getLabel(), DisplayOperation.TWO.getLabel(), DisplayOperation.THREE.getLabel(), MathematicOperation.ADD.getLabel()},
-                {"Rad", MathematicOperation.SINH.getLabel(), MathematicOperation.COSH.getLabel(), MathematicOperation.TANH.getLabel(), MathematicOperation.RECALL_PI.getLabel(), MathematicOperation.RECALL_RAND.getLabel(), DisplayOperation.ZERO.getLabel(), DisplayOperation.POINT.getLabel(), "="}
+                {"Rad", MathematicOperation.SINH.getLabel(), MathematicOperation.COSH.getLabel(), MathematicOperation.TANH.getLabel(), MathematicOperation.RECALL_PI.getLabel(), MathematicOperation.RECALL_RAND.getLabel(), DisplayOperation.ZERO.getLabel(), DisplayOperation.POINT.getLabel(), ControllerOperation.EQUALS.getLabel()}
         };
 
         for (int y = 0; y < labels.length; y++) {

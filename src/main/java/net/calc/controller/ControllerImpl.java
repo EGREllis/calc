@@ -5,8 +5,6 @@ import net.calc.model.Mathematic;
 import net.calc.view.View;
 
 public class ControllerImpl implements Controller {
-    private static final String EQUALS = "=";
-    private static final String ALL_CLEAR = "AC";
     private View view;
     private Display display;
     private Memory memory;
@@ -33,15 +31,10 @@ public class ControllerImpl implements Controller {
         MathematicOperation mathematicOperation = MathematicOperation.getOperationFromLabel(label);
         MemoryOperation memoryOperation = MemoryOperation.getOperationFrom(label);
         DisplayOperation displayOperation = DisplayOperation.getOperationFrom(label);
+        ControllerOperation controllerOperation = ControllerOperation.getOperationFrom(label);
 
-        if (EQUALS.equals(label)) {
-            mathematic.pushNumber(display.getDisplay());
-            display.setDisplay(mathematic.evaluate());
-            display.setOperationPerformed(true);
-        } else if (ALL_CLEAR.equals(label)) {
-            //TODO: Toggle to clear (needs to be investigated)
-            display.clear();
-            mathematic.clear();
+        if (controllerOperation != null) {
+            controllerOperation.evaluate(display, mathematic);
         } else if (displayOperation != null) {
             display.execute(displayOperation);
         } else if (mathematicOperation != null) {
