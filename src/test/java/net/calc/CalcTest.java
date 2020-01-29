@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.util.Map;
 
 public class CalcTest {
+    private Controller controller;
     private SwingView view;
 
     @Before
@@ -19,7 +20,7 @@ public class CalcTest {
         Mathematic mathematic = new MathematicImpl();
         Memory memory = new MemoryImpl();
         Display display = new DisplayImpl();
-        Controller controller = new ControllerImpl(mathematic, memory, display);
+        controller = new ControllerImpl(mathematic, memory, display);
         view = new SwingView(controller) {
             public void start() {
                 setDefaultClose(WindowConstants.DISPOSE_ON_CLOSE);

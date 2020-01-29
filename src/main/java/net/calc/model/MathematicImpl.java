@@ -10,9 +10,6 @@ public class MathematicImpl implements Mathematic {
     @Override
     public String evaluate() {
         MathematicOperation operation = mathematicOperations.pop();
-        if (MathematicOperation.RIGHT_BRACKET.equals(operation)) {
-            operation = mathematicOperations.pop();
-        }
         operation.evaluate(numbers);
         return numbers.pop();
     }
@@ -24,7 +21,9 @@ public class MathematicImpl implements Mathematic {
 
     @Override
     public void pushOperation(MathematicOperation mathematicOperation) {
-        mathematicOperations.push(mathematicOperation);
+        if (mathematicOperation.isStackable()) {
+            mathematicOperations.push(mathematicOperation);
+        }
     }
 
     @Override

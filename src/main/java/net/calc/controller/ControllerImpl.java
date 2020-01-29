@@ -32,14 +32,18 @@ public class ControllerImpl implements Controller {
         } else if (displayOperation != null) {
             display.execute(displayOperation);
         } else if (mathematicOperation != null) {
-            if (mathematicOperation.getOperandCount() > 0) {
-                mathematic.pushNumber(display.getDisplay());
+            if (mathematicOperation.isCalculable()) {
+                if (mathematicOperation.getOperandCount() > 0) {
+                    mathematic.pushNumber(display.getDisplay());
+                }
+                mathematic.pushOperation(mathematicOperation);
+                if (mathematicOperation.getOperandCount() < 2) {
+                    display.setDisplay(mathematic.evaluate());
+                }
+                display.setOperationPerformed(true);
+            } else {
+                mathematic.pushOperation(mathematicOperation);
             }
-            mathematic.pushOperation(mathematicOperation);
-            if (mathematicOperation.getOperandCount() < 2) {
-                display.setDisplay(mathematic.evaluate());
-            }
-            display.setOperationPerformed(true);
         } else if (memoryOperation != null) {
             if (MemoryOperation.MEMORY_RECALL.equals(memoryOperation)) {
                 display.setDisplay(memory.getMemory());
